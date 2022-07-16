@@ -40,7 +40,6 @@ function today() {
               if (x.innerText.length <= 33) {
                 x.innerText += ".0"
               }
-              console.log(x.innerText.length)
               divs.appendChild(x);
               btn.disabled = true;
               if (btn1.disabled) {
@@ -74,7 +73,6 @@ function tommorow() {
               if (x.innerText.length <= 33) {
                 x.innerText += ".0"
               }
-              console.log(x.innerText.length)
               divs.appendChild(x);
               btn1.disabled = true;
               if (btn.disabled) {
@@ -106,7 +104,6 @@ function DATommorow() {
               if (x.innerText.length <= 33) {
                 x.innerText += ".0"
               }
-              console.log(x.innerText.length)
               divs.appendChild(x);
               btn2.disabled = true;
               if (btn.disabled) {
