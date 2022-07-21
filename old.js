@@ -26,3 +26,27 @@ function today() {
       }
     })
   }
+  for(let i = 1;i < 4;i++) {
+    const someDate = new Date();
+    // console.log(someDate.getDay())
+    const numberOfDaysToAdd = i;
+    const result = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+    console.log(new Date(result))
+    let btn1 = result
+    console.log(btn1)
+}
+// const ccc = document.querySelectorAll(".btn")
+
+// ccc.forEach( e => {
+    // date = new Date(e.dataset.date)
+    // console.log(date)
+//     const todayD = new Date();
+//     console.log(todayD)
+// })
+// function buttonCl(Dom, Data) {
+
+// }
+// function ex1() {
+//     const x =
+// }
+// console.log(new Date)

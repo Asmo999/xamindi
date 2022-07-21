@@ -24,18 +24,11 @@ function today() {
                divs.removeChild(child)
                child = divs.lastElementChild
 }
-            const para = document.createElement("p");
-            para.innerText = "Current Temperature" + ":" + weather.current.temp_c;
-            para.style.color = "rgb(71, 68, 68)"
-            para.style.fontSize = "23px";
-            para.style.textAlign = "center";
-            divs.appendChild(para);
+
             for (let i = 0; i < 26; i++) {
               
               const x = document.createElement("p")
               x.innerText = weather.forecast.forecastday[0].hour[i].time + ": temperature  " + weather.forecast.forecastday[0].hour[i].temp_c
-              x.style.color = "black"
-              x.style.fontSize = "23px";
               x.style.textAlign = "center";
               if (x.innerText.length <= 33) {
                 x.innerText += ".0"
