@@ -30,7 +30,6 @@ btnD.textContent = formatDate(6) + daycalc(6)
 btnD.dataset.date = formatDate(6)
 btnX.textContent = formatDate(7) + daycalc(7)
 btnX.dataset.date = formatDate(7)
-lasttargetT = {};
 function ex2(event){
     ETD = event.target.dataset.date
     console.log(ETD)
