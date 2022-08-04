@@ -30,8 +30,6 @@ btnD.textContent = formatDate(6) + daycalc(6)
 btnD.dataset.date = formatDate(6)
 btnX.textContent = formatDate(7) + daycalc(7)
 btnX.dataset.date = formatDate(7)
-dateWASX = {}
-exelW = {}
 function ex2(event){
     ETD = event.target.dataset.date
     fetch(`https://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&dt=${ETD}&aqi=no&alerts=no`)
