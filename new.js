@@ -106,11 +106,6 @@ function daycalc(x) {
     }
     return `${dayX}`
 }
-async function getJSON() {
-    return fetch(`https://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&dt=${dataW}&aqi=no&alerts=no`)
-        .then((response)=>response.json())
-        .then((responseJson)=>{return responseJson});
-}
 let exel = {};
 let lasttarget ={};
 function ex1(event) {
