@@ -10,7 +10,6 @@ function initDataFromApi() {
     fetch('http://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&days=7&aqi=no&alerts=no')
     .then(respone => respone.json())
     .then(response => {
-        
         date = response.forecast.forecastday
         btnF.textContent = date[0].date + daycalc(0)
         btnS.textContent = date[1].date + daycalc(1)
@@ -38,7 +37,6 @@ function ex2(event){
     fetch(`https://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&dt=${ETD}&aqi=no&alerts=no`)
     .then(response => response.json())
     .then(response => {
-        console.log(response.forecast.forecastday[0].hour)
         DataRes = response.forecast.forecastday[0].hour
         event.target.disabled = true;
         lasttarget.disabled = false;
@@ -116,7 +114,6 @@ async function getJSON() {
 let exel = {};
 let lasttarget ={};
 function ex1(event) {
-    console.log(event.target)
     exel = event.target.dataset.date
     event.target.disabled = true;
     lasttarget.disabled = false; 
@@ -129,9 +126,7 @@ function ex1(event) {
     if(date.find(x => x.date === exel)) {
         delis = date.find(x => exel === x.date)
         timex = delis.hour
-        
-        for (let i = 0; i < 26; i+= 1) {
-              
+        for (let i = 0; i < 26; i+= 1) {         
             const x = document.createElement("p")
             x.innerText = timex[i].time + ": temperature  " + timex[i].temp_c
             x.style.textAlign = "center";
@@ -140,6 +135,5 @@ function ex1(event) {
             }
             divs.appendChild(x); 
           }
-        
     }   
 }
