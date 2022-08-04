@@ -30,12 +30,16 @@ btnD.textContent = formatDate(6) + daycalc(6)
 btnD.dataset.date = formatDate(6)
 btnX.textContent = formatDate(7) + daycalc(7)
 btnX.dataset.date = formatDate(7)
+dateWASX = {}
+exelW = {}
 function ex2(event){
     ETD = event.target.dataset.date
     fetch(`https://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&dt=${ETD}&aqi=no&alerts=no`)
     .then(response => response.json())
     .then(response => {
-        DataRes = response.forecast.forecastday[0].hour
+        exelW = event.target.dataset.date
+        dateWASX = response.forecast.forecastday
+        DataRes = dateWASX[0].hour
         event.target.disabled = true;
         lasttarget.disabled = false;
         lasttarget = event.target;
@@ -44,7 +48,9 @@ function ex2(event){
             divs.removeChild(child1)
             child1 = divs.lastElementChild
 }
-        for (let i = 0; i < 26; i+= 1) {       
+        dayC = 0;
+        if(dateWASX.find(x => x.date === exelW)) {
+            for (let i = 0; i < 26; i+= 1) {       
             const x = document.createElement("p")
             x.innerText = DataRes[i].time + ": temperature  " + DataRes[i].temp_c
             x.style.textAlign = "center";
@@ -53,6 +59,7 @@ function ex2(event){
             }
             divs.appendChild(x); 
           }
+        }  
     })
 }
 function formatDate(x) {
