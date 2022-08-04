@@ -74,10 +74,10 @@ function formatDate(x) {
 } 
 function daycalc(x) {
     let d = new Date()
-    if(d.getDay() == 0 || d.getDay() + x == 7) {
+    if(d.getDay() + x == 7) {
         dayX = " Sunday" 
     }
-    if(d.getDay() + x == 1 || d.getDay() + x == 8) {
+    if(d.getDay() + x == 8) {
         dayX = " Monday" 
     }
     if(d.getDay() + x == 2 || d.getDay() + x == 9) {
