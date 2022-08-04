@@ -24,12 +24,12 @@ btnW.textContent = formatDate(3) + daycalc(3)
 btnW.dataset.date = formatDate(3)
 btnA.textContent = formatDate(4) + daycalc(4)
 btnA.dataset.date = formatDate(4)
-btnS.textContent = formatDate(5) + daycalc(5)
-btnS.dataset.date = formatDate(5)
-btnD.textContent = formatDate(6) + daycalc(6)
-btnD.dataset.date = formatDate(6)
-btnX.textContent = formatDate(7) + daycalc(7)
-btnX.dataset.date = formatDate(7)
+// btnS.textContent = formatDate(5) + daycalc(5)
+// btnS.dataset.date = formatDate(5)
+btnD.textContent = formatDate(5) + daycalc(5)
+btnD.dataset.date = formatDate(5)
+btnX.textContent = formatDate(6) + daycalc(6)
+btnX.dataset.date = formatDate(6)
 function ex2(event){
     ETD = event.target.dataset.date
     fetch(`https://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&dt=${ETD}&aqi=no&alerts=no`)
@@ -71,13 +71,13 @@ function formatDate(x) {
         day = '0' + day;
 
     return [year, month, day].join('-') ;
-} 
+}
 function daycalc(x) {
     let d = new Date()
-    if(d.getDay() + x == 7) {
+    if(d.getDay() == 0 || d.getDay() + x == 7) {
         dayX = " Sunday" 
     }
-    if(d.getDay() + x == 8) {
+    if(d.getDay() + x == 1 || d.getDay() + x == 8) {
         dayX = " Monday" 
     }
     if(d.getDay() + x == 2 || d.getDay() + x == 9) {
@@ -92,7 +92,7 @@ function daycalc(x) {
     if(d.getDay() + x == 5 || d.getDay() + x == 12) {
         dayX = " Friday" 
     }
-    if(d.getDay() + x == 6 || d.getDay() + x == 13) {
+    if(d.getDay() + x == 6 || d.getDay() + x == 13 ) {
         dayX = " Saturday" 
     }
     if(x === 0) {
