@@ -74,32 +74,26 @@ function formatDate(x) {
 } 
 function daycalc(x) {
     let d = new Date()
-    if(d.getDay() == 0) {
+    if(d.getDay() == 0 || d.getDay() + x == 7) {
         dayX = " Sunday" 
     }
-    if(d.getDay() + x == 1) {
+    if(d.getDay() + x == 1 || d.getDay() + x == 8) {
         dayX = " Monday" 
     }
-    if(d.getDay() + x == 2) {
+    if(d.getDay() + x == 2 || d.getDay() + x == 9) {
         dayX = " Tuesday" 
     }
-    if(d.getDay() + x == 3) {
+    if(d.getDay() + x == 3 || d.getDay() + x == 10) {
         dayX = " Wednesday" 
     }
-    if(d.getDay() + x == 4) {
+    if(d.getDay() + x == 4 || d.getDay() + x == 11) {
         dayX = " Thursday" 
     }
-    if(d.getDay() + x == 5) {
+    if(d.getDay() + x == 5 || d.getDay() + x == 12) {
         dayX = " Friday" 
     }
-    if(d.getDay() + x == 6) {
+    if(d.getDay() + x == 6 || d.getDay() + x == 13) {
         dayX = " Saturday" 
-    }
-    if(d.getDay() + x == 7) {
-        dayX = " Sunday" 
-    }
-    if(d.getDay() + x == 8) {
-        dayX = " Tuesday" 
     }
     if(x === 0) {
         dayX = " Today"
