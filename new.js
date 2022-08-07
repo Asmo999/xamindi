@@ -13,10 +13,6 @@ btnD.textContent = formatDate(5) + daycalc(5)
 btnD.dataset.date = formatDate(5)
 btnX.textContent = formatDate(6) + daycalc(6)
 btnX.dataset.date = formatDate(6)
-btnW.dataset.Num = "3"
-btnA.dataset.Num = "4" 
-btnD.dataset.Num = "5" 
-btnX.dataset.Num = "6"  
 let date = {};
 let lasttarget ={};
 function initDataFromApi() {
@@ -48,7 +44,6 @@ function formatDate(x) {
 async function ex1(event) {
     delis = {};
     ETD = event.target.dataset.date
-    ESN = event.target.dataset.Num
     if(date instanceof Array && date.find(x => x.date == ETD)) {
         delis = date.find(x => x.date == ETD).hour
         }
@@ -56,7 +51,6 @@ async function ex1(event) {
         delis = date.find(x => x.date === ETD).hour
     }
     else {
-        if(parseInt(ESN) >= 3){
             await fetch(`https://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&dt=${ETD}&aqi=no&alerts=no`)
             .then(response => response.json())
             .then(response => {
@@ -66,7 +60,6 @@ async function ex1(event) {
                 delis = GL[0].hour
         }
     })
-        }
     }
     event.target.disabled = true;
     lasttarget.disabled = false; 
