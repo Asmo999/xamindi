@@ -5,7 +5,31 @@ const btnW = document.querySelector(".btn3")
 const btnA = document.querySelector(".btn4")
 const btnD = document.querySelector(".btn5")
 const btnX = document.querySelector(".btn6")
+btnW.textContent = formatDate(3) + daycalc(3)
+btnW.dataset.date = formatDate(3)
+btnA.textContent = formatDate(4) + daycalc(4)
+btnA.dataset.date = formatDate(4)
+btnD.textContent = formatDate(5) + daycalc(5)
+btnD.dataset.date = formatDate(5)
+btnX.textContent = formatDate(6) + daycalc(6)
+btnX.dataset.date = formatDate(6)
+btnW.dataset.dataX = "dataFW"
+btnA.dataset.dataX = "dataFA" 
+btnD.dataset.dataX = "dataFS" 
+btnX.dataset.dataX = "dataFD"
+btnW.dataset.Num = "3"
+btnA.dataset.Num = "4" 
+btnD.dataset.Num = "5" 
+btnX.dataset.Num = "6"  
 let date = {};
+let exel = {};
+let lasttarget ={};
+let dateWASX = "STD";
+let DataRes = {};
+dataFW = [];
+dataFA = [];
+dataFS = [];
+dataFD = [];
 function initDataFromApi() {
     fetch('http://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&days=7&aqi=no&alerts=no')
     .then(respone => respone.json())
@@ -20,45 +44,44 @@ function initDataFromApi() {
 })
 }
 initDataFromApi();
-btnW.textContent = formatDate(3) + daycalc(3)
-btnW.dataset.date = formatDate(3)
-btnA.textContent = formatDate(4) + daycalc(4)
-btnA.dataset.date = formatDate(4)
-// btnS.textContent = formatDate(5) + daycalc(5)
-// btnS.dataset.date = formatDate(5)
-btnD.textContent = formatDate(5) + daycalc(5)
-btnD.dataset.date = formatDate(5)
-btnX.textContent = formatDate(6) + daycalc(6)
-btnX.dataset.date = formatDate(6)
-function ex2(event){
+async function ex2(event){
     ETD = event.target.dataset.date
-    fetch(`https://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&dt=${ETD}&aqi=no&alerts=no`)
-    .then(response => response.json())
-    .then(response => {
-        exelW = event.target.dataset.date
-        dateWASX = response.forecast.forecastday
-        DataRes = dateWASX[0].hour
-        event.target.disabled = true;
-        lasttarget.disabled = false;
-        lasttarget = event.target;
-        let child1 = divs.lastElementChild
-        while(child1) {
-            divs.removeChild(child1)
-            child1 = divs.lastElementChild
-}
-        dayC = 0;
-        if(dateWASX.find(x => x.date === exelW)) {
-            for (let i = 0; i < 26; i+= 1) {       
-            const x = document.createElement("p")
-            x.innerText = DataRes[i].time + ": temperature  " + DataRes[i].temp_c
-            x.style.textAlign = "center";
-            if (x.innerText.length <= 33) {
-              x.innerText += ".0"
-            }
-            divs.appendChild(x); 
-          }
-        }  
+    ESD = event.target.dataset.dataX
+    ESN = event.target.dataset.Num
+    if(window[ESD] instanceof Array && window[ESD].find(x => x.date == formatDate(parseInt(ESN)))) {
+        }
+    else {
+        await fetch(`https://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&dt=${ETD}&aqi=no&alerts=no`)
+        .then(response => response.json())
+        .then(response => {
+        if(ETD == formatDate(parseInt(ESN))){
+            window[ESD] = response.forecast.forecastday
+        }
     })
+    }
+            console.log("lasha")
+            exelW = event.target.dataset.date
+            dateWASX = window[ESD]
+            DataRes = dateWASX[0].hour
+            event.target.disabled = true;
+            lasttarget.disabled = false;
+            lasttarget = event.target;
+            let child1 = divs.lastElementChild
+            while(child1) {
+                divs.removeChild(child1)
+                child1 = divs.lastElementChild
+    }
+            if(dateWASX.find(x => x.date === exelW)) {
+                for (let i = 0; i < 26; i+= 1) {       
+                const x = document.createElement("p")
+                x.innerText = DataRes[i].time + ": temperature  " + DataRes[i].temp_c
+                x.style.textAlign = "center";
+                if (x.innerText.length <= 33) {
+                  x.innerText += ".0"
+                }
+                divs.appendChild(x); 
+              }
+            }
 }
 function formatDate(x) {
     let d = new Date(),
@@ -72,39 +95,6 @@ function formatDate(x) {
 
     return [year, month, day].join('-') ;
 }
-function daycalc(x) {
-    let d = new Date()
-    if(d.getDay() == 0 || d.getDay() + x == 7) {
-        dayX = " Sunday" 
-    }
-    if(d.getDay() + x == 1 || d.getDay() + x == 8) {
-        dayX = " Monday" 
-    }
-    if(d.getDay() + x == 2 || d.getDay() + x == 9) {
-        dayX = " Tuesday" 
-    }
-    if(d.getDay() + x == 3 || d.getDay() + x == 10) {
-        dayX = " Wednesday" 
-    }
-    if(d.getDay() + x == 4 || d.getDay() + x == 11) {
-        dayX = " Thursday" 
-    }
-    if(d.getDay() + x == 5 || d.getDay() + x == 12) {
-        dayX = " Friday" 
-    }
-    if(d.getDay() + x == 6 || d.getDay() + x == 13 ) {
-        dayX = " Saturday" 
-    }
-    if(x === 0) {
-        dayX = " Today"
-    }
-    if(x === 1) {
-        dayX = " Tommorow"
-    }
-    return `${dayX}`
-}
-let exel = {};
-let lasttarget ={};
 function ex1(event) {
     exel = event.target.dataset.date
     event.target.disabled = true;
@@ -116,11 +106,10 @@ function ex1(event) {
         child = divs.lastElementChild
 }
     if(date.find(x => x.date === exel)) {
-        delis = date.find(x => exel === x.date)
-        timex = delis.hour
+        delis = date.find(x => exel === x.date).hour
         for (let i = 0; i < 26; i+= 1) {         
             const x = document.createElement("p")
-            x.innerText = timex[i].time + ": temperature  " + timex[i].temp_c
+            x.innerText = delis[i].time + ": temperature  " + delis[i].temp_c
             x.style.textAlign = "center";
             if (x.innerText.length <= 33) {
               x.innerText += ".0"
@@ -128,4 +117,17 @@ function ex1(event) {
             divs.appendChild(x); 
           }
     }   
+}
+function daycalc(num) {
+    let someDate = new Date();
+    let numberOfDaysToAdd = num;
+    let result = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+    let sd = new Date(result).toString().slice(0, 3)
+    if(num === 0) {
+        sd = "Today"
+    }
+    if(num === 1) {
+        sd = "Tommorow"
+    }
+    return " "+ sd
 }
