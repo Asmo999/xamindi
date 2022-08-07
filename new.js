@@ -18,7 +18,6 @@ btnA.dataset.Num = "4"
 btnD.dataset.Num = "5" 
 btnX.dataset.Num = "6"  
 let date = {};
-let exel = {};
 let lasttarget ={};
 function initDataFromApi() {
     fetch('http://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&days=7&aqi=no&alerts=no')
@@ -50,12 +49,11 @@ async function ex1(event) {
     delis = {};
     ETD = event.target.dataset.date
     ESN = event.target.dataset.Num
-    exel = event.target.dataset.date
-    if(date instanceof Array && date.find(x => x.date == formatDate(parseInt(ESN)))) {
-        delis = date.find(x => x.date == formatDate(parseInt(ESN))).hour
+    if(date instanceof Array && date.find(x => x.date == ETD)) {
+        delis = date.find(x => x.date == ETD).hour
         }
-    if(date.find(x => x.date === exel)){
-        delis = date.find(x => x.date === exel).hour
+    if(date.find(x => x.date === ETD)){
+        delis = date.find(x => x.date === ETD).hour
     }
     else {
         if(parseInt(ESN) >= 3){
@@ -63,7 +61,7 @@ async function ex1(event) {
             .then(response => response.json())
             .then(response => {
             GL = response.forecast.forecastday
-            if(GL[0].date == formatDate(parseInt(ESN))){
+            if(GL[0].date == ETD){
                 date = date.concat(GL)
                 delis = GL[0].hour
         }
