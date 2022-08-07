@@ -17,6 +17,9 @@ btnW.dataset.dataX = "dataFW"
 btnA.dataset.dataX = "dataFA" 
 btnD.dataset.dataX = "dataFS" 
 btnX.dataset.dataX = "dataFD"
+btnF.dataset.dataX = "date" 
+btnS.dataset.dataX = "date" 
+btnT.dataset.dataX = "date"
 btnW.dataset.Num = "3"
 btnA.dataset.Num = "4" 
 btnD.dataset.Num = "5" 
@@ -44,45 +47,6 @@ function initDataFromApi() {
 })
 }
 initDataFromApi();
-async function ex2(event){
-    ETD = event.target.dataset.date
-    ESD = event.target.dataset.dataX
-    ESN = event.target.dataset.Num
-    if(window[ESD] instanceof Array && window[ESD].find(x => x.date == formatDate(parseInt(ESN)))) {
-        }
-    else {
-        await fetch(`https://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&dt=${ETD}&aqi=no&alerts=no`)
-        .then(response => response.json())
-        .then(response => {
-        if(ETD == formatDate(parseInt(ESN))){
-            window[ESD] = response.forecast.forecastday
-        }
-    })
-    }
-            console.log("lasha")
-            exelW = event.target.dataset.date
-            dateWASX = window[ESD]
-            DataRes = dateWASX[0].hour
-            event.target.disabled = true;
-            lasttarget.disabled = false;
-            lasttarget = event.target;
-            let child1 = divs.lastElementChild
-            while(child1) {
-                divs.removeChild(child1)
-                child1 = divs.lastElementChild
-    }
-            if(dateWASX.find(x => x.date === exelW)) {
-                for (let i = 0; i < 26; i+= 1) {       
-                const x = document.createElement("p")
-                x.innerText = DataRes[i].time + ": temperature  " + DataRes[i].temp_c
-                x.style.textAlign = "center";
-                if (x.innerText.length <= 33) {
-                  x.innerText += ".0"
-                }
-                divs.appendChild(x); 
-              }
-            }
-}
 function formatDate(x) {
     let d = new Date(),
         month = '' + (d.getMonth() + 1),
@@ -95,7 +59,31 @@ function formatDate(x) {
 
     return [year, month, day].join('-') ;
 }
-function ex1(event) {
+async function ex1(event) {
+    delis = {};
+    ETD = event.target.dataset.date
+    ESD = event.target.dataset.dataX
+    ESN = event.target.dataset.Num
+    exel = event.target.dataset.date
+    if(window[ESD] instanceof Array && window[ESD].find(x => x.date == formatDate(parseInt(ESN)))) {
+        delis = window[ESD][0].hour
+        }
+    if(date.find(x => x.date === exel)){
+        delis = date.find(x => x.date === exel).hour
+    }
+    else {
+        if(parseInt(ESN) >= 3){
+            await fetch(`https://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&dt=${ETD}&aqi=no&alerts=no`)
+            .then(response => response.json())
+            .then(response => {
+            if(ETD == formatDate(parseInt(ESN))){
+                window[ESD] = response.forecast.forecastday
+                delis = window[ESD][0].hour
+        }
+    })
+        }
+    }
+
     exel = event.target.dataset.date
     event.target.disabled = true;
     lasttarget.disabled = false; 
@@ -105,8 +93,6 @@ function ex1(event) {
         divs.removeChild(child)
         child = divs.lastElementChild
 }
-    if(date.find(x => x.date === exel)) {
-        delis = date.find(x => exel === x.date).hour
         for (let i = 0; i < 26; i+= 1) {         
             const x = document.createElement("p")
             x.innerText = delis[i].time + ": temperature  " + delis[i].temp_c
@@ -116,7 +102,6 @@ function ex1(event) {
             }
             divs.appendChild(x); 
           }
-    }   
 }
 function daycalc(num) {
     let someDate = new Date();
