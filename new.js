@@ -80,8 +80,6 @@ async function ex1(event) {
     })
         }
     }
-
-    exel = event.target.dataset.date
     event.target.disabled = true;
     lasttarget.disabled = false; 
     lasttarget = event.target;         
