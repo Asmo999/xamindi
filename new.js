@@ -20,10 +20,6 @@ btnX.dataset.Num = "6"
 let date = {};
 let exel = {};
 let lasttarget ={};
-dataFW = [];
-dataFA = [];
-dataFS = [];
-dataFD = [];
 function initDataFromApi() {
     fetch('http://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&days=7&aqi=no&alerts=no')
     .then(respone => respone.json())
