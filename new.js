@@ -13,7 +13,7 @@ btnD.textContent = formatDate(5) + daycalc(5)
 btnD.dataset.date = formatDate(5)
 btnX.textContent = formatDate(6) + daycalc(6)
 btnX.dataset.date = formatDate(6)
-let date = {};
+let date = [];
 let lasttarget ={};
 function initDataFromApi() {
     fetch('http://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&days=7&aqi=no&alerts=no')
@@ -44,12 +44,9 @@ function formatDate(x) {
 async function ex1(event) {
     delis = {};
     ETD = event.target.dataset.date
-    if(date instanceof Array && date.find(x => x.date == ETD)) {
+    if(date.find(x => x.date == ETD)) {
         delis = date.find(x => x.date == ETD).hour
         }
-    if(date.find(x => x.date === ETD)){
-        delis = date.find(x => x.date === ETD).hour
-    }
     else {
             await fetch(`https://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&dt=${ETD}&aqi=no&alerts=no`)
             .then(response => response.json())
