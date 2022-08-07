@@ -13,10 +13,6 @@ btnD.textContent = formatDate(5) + daycalc(5)
 btnD.dataset.date = formatDate(5)
 btnX.textContent = formatDate(6) + daycalc(6)
 btnX.dataset.date = formatDate(6)
-btnW.dataset.dataX = "dataFW"
-btnA.dataset.dataX = "dataFA" 
-btnD.dataset.dataX = "dataFS" 
-btnX.dataset.dataX = "dataFD"
 btnW.dataset.Num = "3"
 btnA.dataset.Num = "4" 
 btnD.dataset.Num = "5" 
@@ -24,8 +20,6 @@ btnX.dataset.Num = "6"
 let date = {};
 let exel = {};
 let lasttarget ={};
-let dateWASX = "STD";
-let DataRes = {};
 dataFW = [];
 dataFA = [];
 dataFS = [];
@@ -59,11 +53,10 @@ function formatDate(x) {
 async function ex1(event) {
     delis = {};
     ETD = event.target.dataset.date
-    ESD = event.target.dataset.dataX
     ESN = event.target.dataset.Num
     exel = event.target.dataset.date
-    if(window[ESD] instanceof Array && window[ESD].find(x => x.date == formatDate(parseInt(ESN)))) {
-        delis = window[ESD][0].hour
+    if(date instanceof Array && date.find(x => x.date == formatDate(parseInt(ESN)))) {
+        delis = date.find(x => x.date == formatDate(parseInt(ESN))).hour
         }
     if(date.find(x => x.date === exel)){
         delis = date.find(x => x.date === exel).hour
@@ -73,9 +66,10 @@ async function ex1(event) {
             await fetch(`https://api.weatherapi.com/v1/forecast.json?key=e880f747d57f409ba9b125456221207&q=95.104.106.120&dt=${ETD}&aqi=no&alerts=no`)
             .then(response => response.json())
             .then(response => {
-            if(ETD == formatDate(parseInt(ESN))){
-                window[ESD] = response.forecast.forecastday
-                delis = window[ESD][0].hour
+            GL = response.forecast.forecastday
+            if(GL[0].date == formatDate(parseInt(ESN))){
+                date = date.concat(GL)
+                delis = GL[0].hour
         }
     })
         }
